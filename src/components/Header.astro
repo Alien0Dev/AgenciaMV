@@ -24,6 +24,50 @@ const { links, actualPage }: Props = Astro.props;
   </div>
 </header>
 
+<script>
+  // Todo este JavaScript se ejecuta de forma nativa en el navegador
+  let lastScrollTop = 0;
+
+  const burgerMenu = document.querySelector(".burger-menu");
+  const linkMenu = document.querySelector(".link-menu");
+  const generalMenu = document.querySelector(".general-menu");
+
+  // 1. Registro de la propiedad CSS animable
+  if (CSS.registerProperty) {
+    try {
+      CSS.registerProperty({
+        name: "--grad-pos",
+        syntax: "<percentage>",
+        inherits: false,
+        initialValue: "0%",
+      });
+    } catch (e) {}
+  }
+
+  // 2. Lógica del Menú Burger
+  burgerMenu?.addEventListener("click", () => {
+    burgerMenu.classList.toggle("active");
+    linkMenu?.classList.toggle("active");
+    document.body.style.overflow = linkMenu?.classList.contains("active") ? "hidden" : "auto";
+  });
+
+  // 3. Lógica de Scroll (Tu animación de subir/bajar)
+  window.addEventListener("scroll", () => {
+    const st = window.scrollY || document.documentElement.scrollTop;
+
+    if (generalMenu) {
+      if (st > lastScrollTop && st > 100) {
+        generalMenu.classList.add("goUp");
+        generalMenu.classList.remove("down");
+      } else {
+        generalMenu.classList.add("down");
+        generalMenu.classList.remove("goUp");
+      }
+    }
+    lastScrollTop = st;
+  });
+</script>
+
 <style>
   :host {
     --color-white: #fff;
