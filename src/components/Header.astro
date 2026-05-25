@@ -1,0 +1,121 @@
+---
+import type { Link } from '../types.d.ts';
+
+interface Props {
+  links: Link[];
+  actualPage: string;
+}
+
+const { links, actualPage }: Props = Astro.props;
+---
+<header class="general-menu">
+  <h2 style="margin:0">Agencia MV</h2>
+  <nav class="link-menu">
+    {
+    links.map((link)=> (
+      <a class={actualPage === link.src ? 'link-secondary' : 'link-white'} href={link.src}>{link.name}</a>
+    ))
+    }
+    <button class="btn-contact">999-33-44-22</button>
+  </nav>
+  <div class="burger-menu">
+    <div id="burger-up" class="burger"></div>
+    <div id="burger-down" class="burger"></div>
+  </div>
+</header>
+
+<style>
+  :host {
+    --color-white: #fff;
+    --media-query-movile: 768px;
+  }
+
+  .general-menu {
+    top: 0;
+    left: 0;
+    color: var(--color-white);
+    padding: 30px 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--general-background);
+    transition: transform 0.5s ease-out;
+    z-index: 200;
+    font-size: 1.4rem;
+  }
+
+  .general-menu.goUp { transform: translateY(-100%); }
+  .general-menu.down { transform: translateY(0); }
+
+  .link-menu {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    transition: all 0.6s ease-in;
+  }
+
+  .link-menu .btn-contact {
+    --grad-pos: 0%;
+    padding: 12px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #e7e7e7;
+    margin-left: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    background: linear-gradient(90deg, #31647c var(--grad-pos), #1b879f var(--grad-pos), #166190);
+    transition: --grad-pos 1s ease, all 0.6s ease;
+  }
+
+  .link-menu .btn-contact:hover { --grad-pos: 100%; }
+
+  .link-menu a { text-decoration: none; transition: 0.2s ease }
+  .link-menu a:hover { text-decoration: underline; text-underline-offset: 5px; color: #fff; }
+
+  .link-white { color: rgba(214, 214, 214, 0.806);  }
+
+  .link-secondary {   color: #fff;  }
+
+
+  /* Mobile menu */
+  @media (max-width: 768px) {
+    .link-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      flex-direction: column;
+      background: var(--general-background);
+      padding: 50px 20px;
+      transform: translateY(-150%);
+      gap: 40px;
+    }
+
+    .link-menu.active { transform: translateY(0); }
+
+    .burger-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .burger {
+      width: 30px;
+      height: 3px;
+      background: white;
+      transition: 0.3s;
+    }
+
+    .burger-menu.active #burger-up { transform: translateY(11px) rotate(45deg); }
+    .burger-menu.active #burger-down { transform: translateY(0) rotate(-45deg); }
+  }
+
+  @media (min-width: 769px) {
+    .burger-menu { display: none; }
+  }
+</style>
