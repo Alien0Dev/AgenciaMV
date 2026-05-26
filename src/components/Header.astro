@@ -1,5 +1,5 @@
 ---
-import type { LinkType } from '../types.d.ts';
+import type { LinkType } from '@root/types.d'
 
 interface Props {
   links: LinkType[];
@@ -71,7 +71,7 @@ const { links, actualPage }: Props = Astro.props;
 <style>
   :host {
     --color-white: #fff;
-    --media-query-movile: 768px;
+    --media-query-movile: 820px;
   }
 
   .general-menu {
@@ -106,26 +106,26 @@ const { links, actualPage }: Props = Astro.props;
     padding: 12px 20px;
     border-radius: 5px;
     text-decoration: none;
-    color: #e7e7e7;
+    color: var(--formal-white);
     margin-left: 10px;
     font-weight: 700;
     cursor: pointer;
-    background: linear-gradient(90deg, #31647c var(--grad-pos), #1b879f var(--grad-pos), #166190);
+    background: var(--btn-gradient);
     transition: --grad-pos 1s ease, all 0.6s ease;
   }
 
   .link-menu .btn-contact:hover { --grad-pos: 100%; }
 
   .link-menu a { text-decoration: none; transition: 0.2s ease }
-  .link-menu a:hover { text-decoration: underline; text-underline-offset: 5px; color: #fff; }
+  .link-menu a:hover { text-decoration: underline; text-underline-offset: 5px; color: var(--color-white); }
 
   .link-white { color: rgba(214, 214, 214, 0.806);  }
 
-  .link-secondary {   color: #fff;  }
+  .link-secondary {   color: var(--color-white);  }
 
 
   /* Mobile menu */
-  @media (max-width: 768px) {
+  @media (max-width: 820px) {
     .link-menu {
       position: absolute;
       top: 100%;
@@ -151,7 +151,7 @@ const { links, actualPage }: Props = Astro.props;
     .burger {
       width: 30px;
       height: 3px;
-      background: white;
+      background: var(--color-white);
       transition: 0.3s;
     }
 
@@ -159,7 +159,7 @@ const { links, actualPage }: Props = Astro.props;
     .burger-menu.active #burger-down { transform: translateY(0) rotate(-45deg); }
   }
 
-  @media (min-width: 769px) {
+  @media (min-width: 821px) {
     .burger-menu { display: none; }
   }
 </style>

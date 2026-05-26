@@ -1,13 +1,35 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/welcome/Header.astro';
-import HowWorks from '../components/welcome/HowWorks.astro';
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from '@layouts/Layout.astro';
+import Header from '@components/welcome/HeaderWelcome.astro';
+import Carousel from '@components/welcome/carousel/Carousel.svelte';
 ---
 
 <Layout actualPage='/' title='Bienvenida'>
   <Header></Header>
-  <HowWorks></HowWorks>
+ 
+<section id="how-works">
+  <h1>¿Cómo trabajamos?</h1>
+  <div class="container">
+
+    <Carousel client:load />
+  </div>
+</section> 
 </Layout>
 
+
+<style>
+  #how-works {
+    margin-block: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  #how-works > h1 {
+    color: var(--accent-purple);
+    font-size: 5rem;
+    margin: 10px 5px 50px 5px;
+  }
+
+
+</style>
