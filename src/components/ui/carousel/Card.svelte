@@ -10,7 +10,7 @@ const { title, text, imgAlt, imgSrc }: CardType = $props();
 <div class="card" transition:fade>
   <div>
     <div class="arrow-container" >
-      <Arrow direction="up_right" theme="semi-transparent" hoverRotation="rotation-left"/>  
+      <Arrow direction="up_right" theme="semi-transparent" rotation="rotation-down" dashed={true}/>  
     </div>
     <img src={imgSrc} alt={imgAlt} >
   </div>
